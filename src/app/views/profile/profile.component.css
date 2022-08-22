@@ -1,0 +1,42 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+    max-width: 30rem;
+    margin: 2rem auto;
+    height: 100vh;
+    gap: 1rem;
+}
+.about__img {
+    width: 14rem;
+    border-radius: 50%;
+}
+.about__greeting {
+    font-size: 1.1rem;
+}
+.about__name {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.about__position {
+    font-size: 1.12rem;
+}
+.contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-size: 1rem;
+    gap: .5rem;
+}
+.contact__text {
+    width: 65%;
+    display: flex;
+    align-items: center;
+}
+.contact__link {
+    color: #000;
+    display: flex;
+    align-items: center;
+}

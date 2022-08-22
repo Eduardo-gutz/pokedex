@@ -1,0 +1,36 @@
+.pokemon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: 23rem;
+}
+
+.pokemon__image {
+    width: auto;
+    height: 65%;
+    z-index: 2;
+}
+.pokemon__aura {
+    position: absolute;
+    bottom: 3rem;
+    width: 18rem;
+    height: 15rem;
+    box-sizing: border-box;
+}
+.pokemon__number {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    font-size: 8rem;
+    font-weight: bold;
+    height: 50%;
+}
+.pokemon__card {
+    width: 100%;
+    height: 30%;
+}

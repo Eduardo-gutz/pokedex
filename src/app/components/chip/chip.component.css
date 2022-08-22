@@ -1,0 +1,10 @@
+.pokemon__type {
+    width: 5rem;
+    height: 1.5rem;
+    text-align: center;
+    margin: 0 .5rem;
+    border-radius: .75rem;
+    text-transform: capitalize;
+    font-size: bold;
+    padding: 0;
+}

@@ -1,0 +1,12 @@
+<article class="pokemon" *ngIf="pokemon" [routerLink]="['/details', pokemon.name]">
+    <app-aura class="pokemon__aura" [types]="pokemon.types"></app-aura>
+    <p class="pokemon__number" [style]="textColor">{{ pokemonNumber }}</p>
+    <img class="pokemon__image" [src]="pokemon.sprites.other['official-artwork'].front_default" [alt]="pokemon.name">
+    <mat-card class="pokemon__card">
+        <mat-card-title style="text-transform: capitalize;">{{ pokemon.name }}</mat-card-title>
+        <mat-card-subtitle>{{ pokemonNumber }}</mat-card-subtitle>
+        <mat-card-actions align="end">
+            <app-chip mat-button *ngFor="let type of pokemon?.types" [type]="type"></app-chip>
+        </mat-card-actions>
+    </mat-card>
+</article>

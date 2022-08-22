@@ -1,0 +1,20 @@
+<main class="main">
+    <form class="search-form">
+        <mat-form-field appearance="fill">
+            <mat-label>Pokemon</mat-label>
+              <input type="text"
+                placeholder="Ex. Pikachu"
+                matInput
+                [formControl]="myControl"
+                [matAutocomplete]="auto"
+              >
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        <button mat-raised-button color="primary" (click)="searchPokemon()">Buscar</button>
+    </form>
+    <app-pokemons-list class="main__list" [pokemonsList]="pokemons" [totalItems]="totalItems"></app-pokemons-list>
+</main>

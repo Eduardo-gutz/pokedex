@@ -1,0 +1,10 @@
+body {
+    background-color: red;
+}
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+.toolbar__logo {
+    height: 100%;
+}
