@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "pwa": "ng build && http-server -p 8080 -c-1 dist/pokedex",
     "test": "ng test"
   },
   "private": true,
@@ -20,6 +21,7 @@
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
+    "@angular/service-worker": "^14.1.0",
     "@ngrx/store": "^14.1.0",
     "chart.js": "^3.6.0",
     "ng2-charts": "^4.0.0",
@@ -32,6 +34,7 @@
     "@angular/cli": "~14.1.2",
     "@angular/compiler-cli": "^14.1.0",
     "@types/jasmine": "~4.0.0",
+    "http-server": "^14.1.1",
     "jasmine-core": "~4.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

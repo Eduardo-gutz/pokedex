@@ -18,6 +18,8 @@ import { ComponentsModule } from './components/components.module';
 import { NgChartsModule } from 'ng2-charts';
 import { backgroundReducer } from './store/background/background.reducer';
 import { paginatorReducer } from './store/paginator/paginator.reducer';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,12 @@ import { paginatorReducer } from './store/paginator/paginator.reducer';
     HomeModule,
     ComponentsModule,
     NgChartsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
