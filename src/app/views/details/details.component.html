@@ -28,15 +28,59 @@
         </mat-card-content>
     </mat-card>
     <mat-card class="details__stats" *ngIf="pokemon.stats.length > 0">
-        <mat-card-content class="">
+        <h2 class="details__title">Stats</h2>
+        <mat-card-content class="details__content">
             <p class="details__stat" *ngFor="let stat of pokemon?.stats">
                 <strong>{{ stat.stat.name }}</strong> {{ stat.base_stat }}
                 <app-divider class="details__divider" [height]="2" [colors]="colors"></app-divider>
             </p>
         </mat-card-content>
+        <mat-card-content class="details__content">
+            <div  class="details__tabs">
+                <app-pokemon-stats-bar [pokemonStats]="pokemon.stats" [color]="colors[0]"></app-pokemon-stats-bar>
+            </div>
+        </mat-card-content>
     </mat-card>
-    <mat-tab-group class="details__tabs" *ngIf="pokemon.stats.length > 0">
-        <mat-tab label="Bar"> <app-pokemon-stats-bar [pokemonStats]="pokemon.stats" [color]="colors[0]"></app-pokemon-stats-bar> </mat-tab>
-        <mat-tab label="Radar"> <app-pokemon-stats [pokemonStats]="pokemon.stats" [color]="colors[0]"></app-pokemon-stats> </mat-tab>
-    </mat-tab-group>
+    <mat-card class="details__stats" *ngIf="pokemon.stats.length > 0">
+        <h2 class="details__title">Comparator</h2>
+        <mat-card-content class="details__content">
+            <div  class="details__tabs">
+                <app-pokemon-stats [pokemonStats]="statsToCompator" [color]="colorsToComparator"></app-pokemon-stats>
+            </div>
+        </mat-card-content>
+        <mat-card-content class="details__content">
+            <div class="comparative__header">
+                <mat-form-field appearance="fill">
+                    <mat-label>Pokemon</mat-label>
+                    <input type="text"
+                        placeholder="Ex. Pikachu"
+                        matInput
+                        [formControl]="pokemonAuto"
+                        [matAutocomplete]="auto"
+                    >
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="changeOption($event)">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <section class="comparator">
+                <div class="rival">
+                    <div class="hp" *ngIf="pokemonRival">
+                        <p class="hp__name">{{ pokemonRival.name | titlecase }}</p>
+                        <span class="hp__bar"></span>
+                    </div>
+                    <img *ngIf="pokemonRival" [src]="pokemonRival.sprites.front_default" [alt]="pokemonRival.name">
+                </div>
+                <div class="self">
+                    <img [src]="pokemon.sprites.back_default" alt="">
+                    <div class="hp">
+                        <p class="hp__name">{{ pokemon.name | titlecase }}</p>
+                        <span class="hp__bar"></span>
+                    </div>
+                </div>
+            </section>
+        </mat-card-content>
+    </mat-card>
 </div>

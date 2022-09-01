@@ -5,6 +5,7 @@ import { DetailsRoutingModule } from './details-routing.module';
 import { DetailsComponent } from './details.component';
 import { MaterialModule } from 'src/app/material.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     DetailsRoutingModule,
     MaterialModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class DetailsModule { }

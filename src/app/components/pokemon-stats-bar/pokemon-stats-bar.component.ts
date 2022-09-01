@@ -12,13 +12,15 @@ export class PokemonStatsBarComponent {
   @Input() color: string = ''
 
   public barChartOptions: ChartOptions = {
+    indexAxis: 'y',
     responsive: true,
     backgroundColor: '#456565',
     plugins: {
       legend: {
         display: false
       }
-    }
+    },
+
   };
   public barChartType: ChartType = 'bar';
   public barChartLegend = false;
@@ -36,7 +38,7 @@ export class PokemonStatsBarComponent {
         {
           data: this.pokemonStats.map((stat) => stat.base_stat),
           backgroundColor: this.color + 'BB',
-          hoverBackgroundColor: this.color
+          hoverBackgroundColor: this.color,
         }
       ]
     }

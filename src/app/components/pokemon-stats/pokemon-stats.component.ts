@@ -8,8 +8,8 @@ import { Stats } from 'src/app/interfaces/pokemon.inteface';
   styleUrls: ['./pokemon-stats.component.css']
 })
 export class PokemonStatsComponent {
-  @Input() pokemonStats: Stats[] = []
-  @Input() color: string = ''
+  @Input() pokemonStats: Stats[][] = []
+  @Input() color: string[] = []
 
   public radarChartOptions: ChartOptions = {
     responsive: true,
@@ -31,22 +31,21 @@ export class PokemonStatsComponent {
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.radarChartLabels = this.pokemonStats.map((stat) => stat.stat.name)
+  ngOnChanges(): void {    
+    this.radarChartLabels = this.pokemonStats[0].map((stat) => stat.stat.name)
 
     this.radarChartData = {
       labels: this.radarChartLabels,
-      datasets: [
-        {
-          data: this.pokemonStats.map((stat)  => stat.base_stat),
+      datasets: this.pokemonStats.map((stats, index) => ({
+          data: stats.map((stat)  => stat.base_stat),
           label: 'Stats',
-          backgroundColor: this.color + '55',
-          hoverBackgroundColor: this.color + '88',
-          pointBackgroundColor: this.color + 'AA',
-          pointBorderColor: this.color + 'AA',
-          showLine: false
-        }
-      ]
+          backgroundColor: this.color[index] + '55',
+          hoverBackgroundColor: this.color[index] + '88',
+          pointBackgroundColor: index > 0 ? '#9f3a3a' : '#3a579f' + 'AA',
+          pointBorderColor: index > 0 ? '#9f3a3a' : '#3a579f' + 'AA',
+          borderColor: index > 0 ? '#9f3a3a' : '#3a579f'
+        })
+      )
     };
   }
 }
