@@ -17,9 +17,10 @@ import { PokemonItemComponent } from './components/pokemon-item/pokemon-item.com
 import { ComponentsModule } from './components/components.module';
 import { NgChartsModule } from 'ng2-charts';
 import { backgroundReducer } from './store/background/background.reducer';
-import { paginatorReducer } from './store/paginator/paginator.reducer';
+import { paginatorReducer } from './store/paginator/paginator/paginator.reducer';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { filterTypeReducer } from './store/paginator/filters/filter.reducer';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,12 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    StoreModule.forRoot({pokemon: pokemonReducer, background: backgroundReducer, pageIndex: paginatorReducer}),
+    StoreModule.forRoot({
+      pokemon: pokemonReducer,
+      background: backgroundReducer,
+      pageIndex: paginatorReducer,
+      filterByType: filterTypeReducer
+    }),
     FormsModule,
     ReactiveFormsModule,
     HomeModule,

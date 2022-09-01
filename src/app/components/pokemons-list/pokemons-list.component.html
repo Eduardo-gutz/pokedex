@@ -1,5 +1,5 @@
 <section class="list-pokemon">
-    <app-pokemon-item *ngFor="let pokemon of pokemonsList" [url]="pokemon.url" [name]="pokemon.name"></app-pokemon-item>
+    <app-pokemon-item *ngFor="let pokemon of pagePokemonList" [url]="pokemon.url" [name]="pokemon.name"></app-pokemon-item>
     <mat-paginator
         class="paginator"
         [length]="totalItems"

@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { Pokemon } from 'src/app/interfaces/pokemon.inteface';
 import { PokedexService } from 'src/app/services/pokedex.service';
 import pokeNames from 'src/app/helpers/allPokemonsNames';
 import { FormControl } from '@angular/forms';
+import { pokemonsTypes } from 'src/app/helpers/allPokemonsTypes';
+import { BasicName } from 'src/app/interfaces/common.interface';
+import { TypesService } from 'src/app/services/types.service';
+import { TypeResponse } from 'src/app/interfaces/types.interface';
+import { select, Store } from '@ngrx/store';
+import { filterType } from 'src/app/store/paginator/filters/filter.action';
 
 @Component({
   selector: 'app-home',
@@ -13,27 +18,49 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  pokemons: Pokemon[] = []
+  private filterByType$: Observable<TypeResponse | undefined>
+
+  pokemons: BasicName[] = []
   totalItems: number = 0
-  autocompleteOptions: string[] = pokeNames
+  pokemonsTypes = pokemonsTypes
+  isFiltred: boolean = false
+  valueFilter: string = ''
   
   myControl = new FormControl('');
   filteredOptions!: Observable<string[]>;
   
-  constructor(private pokedexServ: PokedexService, private router: Router) { }
+  constructor(
+    private pokedexServ: PokedexService,
+    private router: Router,
+    private typeServ: TypesService,
+    private store: Store<{filterByType: TypeResponse}>
+  ) {
+    this.filterByType$ = this.store.pipe(select('filterByType'));
+  }
   
   ngOnInit(): void {
-    this.getPokemonsFromService()
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
-    );
+      );
+
+    this.filterByType$.pipe(take(1)).subscribe((filter) => {
+      if(filter) {
+        this.pokemons = filter.pokemon.map((poke) => poke.pokemon )
+        this.totalItems = this.pokemons.length
+        this.isFiltred = true
+        this.valueFilter = filter.name
+      } else {
+        this.isFiltred = false
+        this.getPokemonsFromService()
+      }
+    })
   }
   
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.autocompleteOptions.filter(option => option.toLowerCase().includes(filterValue));
+    return pokeNames.filter(option => option.toLowerCase().includes(filterValue));
   }
   
   private getPokemonsFromService() {
@@ -46,6 +73,22 @@ export class HomeComponent implements OnInit {
   searchPokemon() {
     const nameToSearch = this.myControl.value
     this.router.navigateByUrl(`/details/${nameToSearch}`)
+  }
+
+  filterPokemons($event: string) {
+    if(!$event) {
+      this.getPokemonsFromService()
+      this.isFiltred = false
+      this.store.dispatch(filterType({filterByType: undefined}))
+      return
+    }
+    this.typeServ.getPokemonType($event).subscribe((type: TypeResponse) => {
+      this.pokemons = type.pokemon.map((poke) => poke.pokemon )
+      this.totalItems = this.pokemons.length
+      this.isFiltred = true
+
+      this.store.dispatch(filterType({filterByType: type}))
+    })
   }
 
 }

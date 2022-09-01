@@ -1,10 +1,5 @@
 import { BasicName } from "./common.interface";
 
-export interface Pokemon {
-    name: string;
-    url: string;
-}
-
 export interface Type {
     slot: number
     type: {

@@ -1,20 +1,31 @@
 <main class="main">
-    <form class="search-form">
+    <form class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Filtrar por tipo</mat-label>
+        <mat-select (valueChange)="filterPokemons($event)" [value]="valueFilter">
+          <mat-option>Ningun filtro</mat-option>
+          <mat-option *ngFor="let type of pokemonsTypes" [value]="type">
+            {{ type | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="search-form">
         <mat-form-field appearance="fill">
-            <mat-label>Pokemon</mat-label>
-              <input type="text"
-                placeholder="Ex. Pikachu"
-                matInput
-                [formControl]="myControl"
-                [matAutocomplete]="auto"
-              >
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
+          <mat-label>Pokemon</mat-label>
+            <input type="text"
+              placeholder="Ex. Pikachu"
+              matInput
+              [formControl]="myControl"
+              [matAutocomplete]="auto"
+            >
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
         <button mat-raised-button color="primary" (click)="searchPokemon()">Buscar</button>
+      </div>
     </form>
-    <app-pokemons-list class="main__list" [pokemonsList]="pokemons" [totalItems]="totalItems"></app-pokemons-list>
+    <app-pokemons-list class="main__list" [pokemonsList]="pokemons" [totalItems]="totalItems" [thereIsFilter]="isFiltred"></app-pokemons-list>
 </main>
