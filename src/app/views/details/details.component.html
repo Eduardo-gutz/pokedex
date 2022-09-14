@@ -17,10 +17,10 @@
         <mat-card-content class="details__profile">
             <p class="details__desc">{{ specie.flavor_text_entries[0].flavor_text }}</p>
             <app-divider class="details__divider" [height]="7" [colors]="colors"></app-divider>
-            <p class="details__info"><strong>Height:</strong> {{ pokemon.height }}</p>
-            <p class="details__info"><strong>Weight:</strong> {{ pokemon.weight }}</p>
-            <p class="details__info"><strong>Gender Rate:</strong> {{ specie.gender_rate }}</p>
-            <p class="details__info"><strong>Capture Rate:</strong> {{ specie.capture_rate }}</p>
+            <p class="details__info"><strong>Height:</strong> {{ pokemon.height | height }}</p>
+            <p class="details__info"><strong>Weight:</strong> {{ pokemon.weight | weight }}</p>
+            <p class="details__info"><strong>Gender Rate:</strong> {{ specie.gender_rate | genderRate }}</p>
+            <p class="details__info"><strong>Capture Rate:</strong> {{ specie.capture_rate | captureRate }}</p>
             <p class="details__info"><strong>Egg Groups:</strong> <span *ngFor="let group of specie.egg_groups">{{ group.name }}, </span></p>
             <p class="details__info"><strong>Habitat:</strong> {{ specie.habitat.name }}</p>
             <p class="details__info"><strong>Hatch Counter:</strong> {{ specie.hatch_counter }}</p>

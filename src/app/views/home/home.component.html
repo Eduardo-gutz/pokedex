@@ -1,7 +1,7 @@
 <main class="main">
     <form class="form">
       <mat-form-field appearance="fill">
-        <mat-label>Filtrar por tipo</mat-label>
+        <mat-label>Filter by type</mat-label>
         <mat-select (valueChange)="filterPokemons($event)" [value]="valueFilter">
           <mat-option>Ningun filtro</mat-option>
           <mat-option *ngFor="let type of pokemonsTypes" [value]="type">
@@ -24,7 +24,7 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="searchPokemon()">Buscar</button>
+        <button mat-raised-button color="primary" (click)="searchPokemon()">Search</button>
       </div>
     </form>
     <app-pokemons-list class="main__list" [pokemonsList]="pokemons" [totalItems]="totalItems" [thereIsFilter]="isFiltred"></app-pokemons-list>

@@ -12,7 +12,6 @@ import { savePokemons } from 'src/app/store/pokemons/pokemon.action';
 import typesColors from 'src/environments/typesColors';
 import {map, startWith} from 'rxjs/operators';
 import pokeNames from 'src/app/helpers/allPokemonsNames';
-import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 
